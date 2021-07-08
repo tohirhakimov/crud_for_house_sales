@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit Post</h2>
+                <h2>Edit Flat</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('flats.index') }}"> Back</a>
@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('flats.update',$flat->id) }}" method="POST">
+    <form action="{{ route('flats.update',$flat_id) }}" method="POST">
         @csrf
 
         @method('PUT')
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <strong>Floor:</strong>
                     <select name='porche_id' class="form-control" required>
-    @foreach ( $floors as $floor)
+    @foreach ( $flats as $flat)
     <option value="{{$floor['id']}}">{{$floor['id']}}</option>
     @endforeach
                         

@@ -43,7 +43,7 @@
             <div class="form-group">
                 <strong>Flat:</strong>
                 <select name='flat_id' class="form-control" required>
-@foreach ( $sold_flats as $sold_flat)
+@foreach ( $flats as $flat)
 <option value="{{$flat['id']}}">{{$flat['id']}}</option>
 @endforeach
                     

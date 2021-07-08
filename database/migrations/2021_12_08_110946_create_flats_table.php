@@ -20,7 +20,7 @@ class CreateFlatsTable extends Migration
             $table->integer('number');
             $table->integer('area');
             $table->integer('price');
-            $table->enum('status', ['sold', 'not sold']);
+            $table->enum('status', ['sold', 'not_sold']);
             $table->timestamps();
         });
     }

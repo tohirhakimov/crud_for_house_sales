@@ -9,13 +9,12 @@ class Flat extends Model
 {
     use HasFactory;
 
-    protected $table = 'flats';
-
     protected $fillable = [
         'name',
         'number',
         'area',
         'price',
+        'status',
         'floor_id'
     ];
 

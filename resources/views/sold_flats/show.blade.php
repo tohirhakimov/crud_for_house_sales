@@ -13,24 +13,19 @@
     </div>
 
     <div class="row">
+        
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Name:</strong>
-                {{ $floor->name }}
+                <strong>Flat Number:</strong>
+                {{ $sold_flat->client_id }}
             </div>
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Floor Number:</strong>
-                {{ $floor->number }}
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Porche Number:</strong>
-                {{ $floor->porche_id }}
+                <strong> Number:</strong>
+                {{ $sold_flat->flat_id }}
             </div>
         </div>
 

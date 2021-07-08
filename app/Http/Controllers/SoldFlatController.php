@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Sold_flat;
+use App\Models\Flat;
 use Illuminate\Http\Request;
 
 class SoldFlatController extends Controller
@@ -29,7 +31,9 @@ class SoldFlatController extends Controller
      */
     public function create()
     {
-        return view('sold_flats.create');
+        $clients=Client::orderBy('created_at', 'DESC')->get();
+        $flats=Flat::orderBy('created_at', 'DESC')->get();
+        return view('sold_flats.create', compact ('clients', 'flats'));
     }
 
     /**
@@ -40,6 +44,7 @@ class SoldFlatController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'client_id' => 'required',
             'flat_id' => 'required',
@@ -58,9 +63,12 @@ class SoldFlatController extends Controller
      * @param  \App\Models\Sold_flat  $sold_flat
      * @return \Illuminate\Http\Response
      */
-    public function show(Sold_flat $sold_flat)
+    public function show($sold_flat)
     {
-        return view('sold_flats.show', compact('sold_flat'));
+        $clients=Client::orderBy('created_at', 'Desc')->get();
+        $flats=Flat::orderBy('created_at', 'Desc')->get();
+        $sold_flat = Flat::where('status', 'sold');
+        return view('sold_flats.show', compact('sold_flat', 'clients', 'flats'));
     }
 
     /**
@@ -71,7 +79,9 @@ class SoldFlatController extends Controller
      */
     public function edit(Sold_flat $sold_flat)
     {
-        return view('sold_flats.edit', compact('sold_flat'));
+        $clients=Client::orderBy('created_at', 'DESC')->get();
+        $flats=Flat::where('status', 'sold')->firstOrFail();
+        return view('sold_flats.edit', compact ('clients', 'flats'));
     }
     /**
      * Update the specified resource in storage.

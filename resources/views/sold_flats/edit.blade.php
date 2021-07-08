@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('sold_flats.update',$floor->id) }}" method="POST">
+    <form action="{{ route('sold_flats.update',$sold_flat->id) }}" method="POST">
         @csrf
 
         @method('PUT')
@@ -32,8 +32,8 @@
                 <div class="form-group">
                     <strong>Client:</strong>
                     <select name='client_id' class="form-control" required>
-    @foreach ( $clients as $client)
-    <option value="{{$client['id']}}">{{$client['id']}}</option>
+    @foreach ( $sold_flats as $sold_flat)
+    <option value="{{$sold_flat->client_id}}">{{$sold_flat->client_id}}</option>
     @endforeach
                         
                     </select>
@@ -43,8 +43,8 @@
                 <div class="form-group">
                     <strong>Flat:</strong>
                     <select name='flat_id' class="form-control" required>
-    @foreach ( $flats as $flat)
-    <option value="{{$flat['id']}}">{{$flat['id']}}</option>
+    @foreach ( $sold_flats as $sold_flat)
+    <option value="{{$sold_flat->flat_id}}">{{$sold_flat->flat_id}}</option>
     @endforeach
                         
                     </select>

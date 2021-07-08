@@ -7,7 +7,7 @@
                 <h2>Laravel 8 CRUD </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('sold_flats.create') }}"> Create New Floor</a>
+                <a class="btn btn-success" href="{{ route('sold_flats.create') }}"> Create New Sold Flat</a>
             </div>
         </div>
     </div>
@@ -26,12 +26,12 @@
         @foreach ($sold_flats as $sold_flat)
         <tr>
             
-            <td>{{ $sold_flat->client['id'] }}</td>
-            <td>{{ $sold_flat->flat['id'] }}</td>
+            <td>{{ $sold_flat->client_id }}</td>
+            <td>{{ $sold_flat->flat_id }}</td>
             <td>
-                 <a class="btn btn-info" href="{{ route('sold_flats.show',$floor->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('sold_flats.edit',$floor->id) }}">Edit</a>
-                <form action="{{ route('sold_flats.destroy',$floor->id) }}" method="POST">
+                 <a class="btn btn-info" href="{{ route('sold_flats.show',$sold_flat->id) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ route('sold_flats.edit',$sold_flat->id) }}">Edit</a>
+                <form action="{{ route('sold_flats.destroy',$sold_flat->id) }}" method="POST">
    
                     @csrf
                     @method('DELETE')

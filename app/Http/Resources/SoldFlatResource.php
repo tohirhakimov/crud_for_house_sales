@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Sold_flatResource extends JsonResource
+class SoldFlatResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,6 +14,9 @@ class Sold_flatResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'client_id' => $this->client_id,
+            'flat_id' => $this->flat_id
+        ];
     }
 }

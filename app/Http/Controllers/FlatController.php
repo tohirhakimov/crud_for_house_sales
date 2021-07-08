@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Flat;
 use App\Models\Floor;
+use App\Models\Porche;
+use App\Models\House;
 use Illuminate\Http\Request;
 
 class FlatController extends Controller
@@ -29,9 +31,10 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $flats = Flat::latest()->paginate(5);
         $floors=Floor::orderBy('created_at', 'Desc')->get();
-        return view('flats.create',['floors'=>$floors]);
+        return view('flats.create',['floors'=>$floors], compact('flats'));
     }
 
     /**
@@ -62,9 +65,15 @@ class FlatController extends Controller
      * @param  \App\Models\Flat  $flat
      * @return \Illuminate\Http\Response
      */
-    public function show(Flat $flat)
+    public function show($house_id, $porche_id, $floor_id, $flat_id)
     {
-        return view('flats.show', compact('flat'));
+        $houses=House::orderBy('created_at', 'Desc')->get();
+        $porches=Porche::orderBy('created_at', 'Desc')->get();
+        $floors=Floor::orderBy('created_at', 'Desc')->get();
+        $porche = Porche::find($porche_id);
+        $floor = Floor::find($floor_id);
+        $flat = Flat::find($flat_id);
+        return view('flats.show', compact('flat', 'floors', 'porches', 'houses'));
     }
 
     /**
@@ -75,7 +84,9 @@ class FlatController extends Controller
      */
     public function edit(Flat $flat)
     {
-        return view('flats.edit', compact('flat'));
+        $flats = Flat::latest()->paginate(5);
+        $floors=Floor::orderBy('created_at', 'Desc')->get();
+        return view('flats.edit',['floors'=>$floors], compact('flats'));
     }
     /**
      * Update the specified resource in storage.

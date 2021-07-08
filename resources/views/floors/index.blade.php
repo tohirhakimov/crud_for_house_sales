@@ -18,6 +18,7 @@
         </div>
     @endif
 
+    
     <table class="table table-bordered">
         <tr>
             <th>Name</th>
@@ -28,9 +29,9 @@
         <tr>
             <td>{{ $floor->name }}</td>
             <td>{{ $floor->number }}</td>
-            <td>{{ $floor->porche['id'] }}</td>
+            <td>{{ $floor->porche['name'] }}</td>
             <td>
-                 <a class="btn btn-info" href="{{ route('floors.show',$floor->id) }}">Show</a>
+                 <a class="btn btn-info" href="{{ route('house.porche.floor.show',[$floor->porche->house->id, $floor->porche_id, $floor->id]) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('floors.edit',$floor->id) }}">Edit</a>
                 <form action="{{ route('floors.destroy',$floor->id) }}" method="POST">
    

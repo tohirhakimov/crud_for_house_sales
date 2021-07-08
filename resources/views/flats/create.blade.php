@@ -66,6 +66,18 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Status:</strong>
+                <select name='status' class="form-control" required>
+
+<option value="sold">Sold</option>
+<option value="not_sold">Not sold</option>
+                    
+                </select>
+            </div>
+        </div>
+
 
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Submit</button>

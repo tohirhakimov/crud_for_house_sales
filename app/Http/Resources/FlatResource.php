@@ -19,6 +19,7 @@ class FlatResource extends JsonResource
             'name' => $this->name,
             'area' => $this->area,
             'price' => $this->price,
+            'status' => $this->status
         ];
     }
 }

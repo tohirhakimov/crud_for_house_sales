@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\House;
 use App\Models\Porche;
+use App\Models\House;
+
 use Illuminate\Http\Request;
 
 class PorcheController extends Controller
@@ -15,10 +16,10 @@ class PorcheController extends Controller
     public function index()
     {
         $porches = Porche::latest()->paginate(5);
-
+        
         return view('porches.index', compact('porches'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
-    }
+    } 
 
 
 
@@ -31,7 +32,7 @@ class PorcheController extends Controller
     public function create()
     {
         $houses=House::orderBy('created_at', 'Desc')->get();
-        return view('porches.create',['houses'=>$houses]);
+        return view('porches.create', compact('houses'));
     }
 
     /**
@@ -45,9 +46,7 @@ class PorcheController extends Controller
         $request->validate([
             'name' => 'required',
             'number' => 'required',
-            'house_id'=>'required'
           
-        
         ]);
 
         Porche::create($request->all());
@@ -62,9 +61,11 @@ class PorcheController extends Controller
      * @param  \App\Models\Porche  $porche
      * @return \Illuminate\Http\Response
      */
-    public function show(Porche $porche)
+    public function show($porche_id, $house_id)
     {
-        return view('porches.show', compact('porche'));
+        $houses=House::orderBy('created_at', 'Desc')->get();
+        $porche = Porche::find($porche_id);
+        return view('porches.show', compact('porche', 'houses'));
     }
 
     /**
@@ -73,9 +74,11 @@ class PorcheController extends Controller
      * @param  \App\Models\Porche  $porche
      * @return \Illuminate\Http\Response
      */
-    public function edit(Porche $porche)
+    public function edit($id)
     {
-        return view('porches.edit', compact('porche'));
+        $houses=House::orderBy('created_at', 'Desc')->get();
+        $porche = Porche::find($id);
+        return view('porches.edit', compact('porche', 'houses'));
     }
     /**
      * Update the specified resource in storage.
@@ -87,9 +90,11 @@ class PorcheController extends Controller
     public function update(Request $request, Porche $porche)
     {
         $request->validate([
-            'number' => 'required',
             'name' => 'required',
-            'house_id'=>'required'
+            'number' => 'required',
+            'house_id' => 'required'
+
+            
         ]);
         $porche->update($request->all());
 
@@ -107,7 +112,7 @@ class PorcheController extends Controller
         $porche->delete();
 
         return redirect()->route('porches.index')
-            ->with('success', 'Porche deleted successfully');
+            ->with('success', 'flat deleted successfully');
     }
 }
 

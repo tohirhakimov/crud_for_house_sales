@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Porche;
 use App\Models\Floor;
+use App\Models\House;
 use Illuminate\Http\Request;
 
 class FloorController extends Controller
@@ -61,9 +62,13 @@ class FloorController extends Controller
      * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function show(Floor $floor)
+    public function show($house_id, $porche_id, $floor_id)
     {
-        return view('floors.show', compact('floor'));
+        $houses=House::orderBy('created_at', 'Desc')->get();
+        $porches=Porche::orderBy('created_at', 'Desc')->get();
+        $porche = Porche::find($porche_id);
+        $floor = Floor::find($floor_id);
+        return view('floors.show', compact('floor', 'porches', 'houses'));
     }
 
     /**
