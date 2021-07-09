@@ -17,8 +17,8 @@
 
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Flat Number:</strong>
-                {{ $sold_flat->client_id }}
+                <strong>Client Name:</strong>
+                {{ $sold_flat->id}}
             </div>
         </div>
 

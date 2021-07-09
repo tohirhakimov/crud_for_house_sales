@@ -82,11 +82,7 @@ class HouseController extends Controller
      */
     public function update(Request $request, House $house)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            
-        ]);
+        
         $house->update($request->all());
 
         return redirect()->route('houses.index')

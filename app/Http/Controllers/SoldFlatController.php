@@ -15,9 +15,9 @@ class SoldFlatController extends Controller
      */
     public function index()
     {
-        $sold_flats = Sold_flat::latest()->paginate(5);
-
-        return view('sold_flats.index', compact('sold_flats'))
+        $sold_flats = Flat::where("status","sold")->paginate(5);
+        $clients=Client::orderBy('created_at', 'DESC')->get();
+        return view('sold_flats.index', compact('sold_flats', 'clients'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -77,11 +77,12 @@ class SoldFlatController extends Controller
      * @param  \App\Models\Sold_flat  $sold_flat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sold_flat $sold_flat)
+    public function edit($id)
     {
         $clients=Client::orderBy('created_at', 'DESC')->get();
         $flats=Flat::where('status', 'sold')->firstOrFail();
-        return view('sold_flats.edit', compact ('clients', 'flats'));
+        $sold_flat = Flat::where('status', 'sold');
+        return view('sold_flats.edit', compact ('sold_flat', 'clients', 'flats'));
     }
     /**
      * Update the specified resource in storage.
@@ -92,11 +93,7 @@ class SoldFlatController extends Controller
      */
     public function update(Request $request, Sold_flat $sold_flat)
     {
-        $request->validate([
-            'client_id' => 'required',
-            'flat_id' => 'required',
-            
-        ]);
+        
         $sold_flat->update($request->all());
 
         return redirect()->route('sold_flats.index')

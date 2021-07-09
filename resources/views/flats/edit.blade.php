@@ -22,7 +22,7 @@
         </div>
     @endif
 
-    <form action="{{ route('flats.update',$flat_id) }}" method="POST">
+    <form action="{{ route('flats.update',$flat->id) }}" method="POST">
         @csrf
 
         @method('PUT')
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <strong>Floor:</strong>
                     <select name='porche_id' class="form-control" required>
-    @foreach ( $flats as $flat)
+    @foreach ( $floors as $floor)
     <option value="{{$floor['id']}}">{{$floor['id']}}</option>
     @endforeach
                         
@@ -65,6 +65,16 @@
                     <textarea class="form-control" style="height:150px" name="Price" placeholder="Price">{{ $flat->number }}</textarea>
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Status:</strong>
+                    <select name='status' class="form-control" required>
+    
+    <option value="sold">Sold</option>
+    <option value="not_sold">Not sold</option>
+                        
+                    </select>
                 
 
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

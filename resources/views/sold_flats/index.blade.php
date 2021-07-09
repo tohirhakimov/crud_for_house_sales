@@ -22,12 +22,14 @@
         <tr>
             <th>Client</th>
             <th>Flat</th>
+            <th>Total price</th>
         </tr>
         @foreach ($sold_flats as $sold_flat)
         <tr>
             
-            <td>{{ $sold_flat->client_id }}</td>
-            <td>{{ $sold_flat->flat_id }}</td>
+            <td>{{ $sold_flat->name }}</td>
+            <td>{{ $sold_flat->id }}</td>
+            <td>{{ $sold_flat->price * $sold_flat->area }}</td>
             <td>
                  <a class="btn btn-info" href="{{ route('sold_flats.show',$sold_flat->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('sold_flats.edit',$sold_flat->id) }}">Edit</a>

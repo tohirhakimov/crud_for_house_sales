@@ -17,6 +17,7 @@ class CreateSoldFlatsTable extends Migration
             $table->id();
             $table->foreignId('client_id')->constrained();
             $table->foreignId('flat_id')->constrained();
+            $table->integer('total_price')->nullable;
             $table->timestamps();
         });
     }

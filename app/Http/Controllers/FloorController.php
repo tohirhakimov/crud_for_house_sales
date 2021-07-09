@@ -77,9 +77,12 @@ class FloorController extends Controller
      * @param  \App\Models\Floor  $floor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Floor $floor)
+    public function edit($id)
     {
-        return view('floors.edit', compact('floor'));
+        $porches=Porche::orderBy('created_at', 'Desc')->get();
+        $floors=Floor::orderBy('created_at', 'Desc')->get();
+        $floor = Floor::find($id);
+        return view('floors.edit', compact('floor', 'porches', 'floors'));
     }
     /**
      * Update the specified resource in storage.
@@ -90,12 +93,7 @@ class FloorController extends Controller
      */
     public function update(Request $request, Floor $floor)
     {
-        $request->validate([
-            'name' => 'required',
-            'number' => 'required',
-            'porche_id' => 'required'
-            
-        ]);
+    
         $floor->update($request->all());
 
         return redirect()->route('floors.index')

@@ -22,5 +22,5 @@ Route::resource('sold_flats', SoldFlatController::class);
 Route::get('houses/{house_id}/porches/{porche_id}', [PorcheController::class,'show'])->name('house.porche.show');
 Route::get('houses/{house_id}/porches/{porche_id}/floors/{floor_id}', [FloorController::class,'show'])->name('house.porche.floor.show');
 Route::get('houses/{house_id}/porches/{porche_id}/floors/{floor_id}/flats/{flat_id}', [FlatController::class,'show'])->name('house.porche.floor.flat.show');
-
+Route::get('flats/{flat_id}/sell', [FlatController::class,'sell'])->name('flats.sell');
 

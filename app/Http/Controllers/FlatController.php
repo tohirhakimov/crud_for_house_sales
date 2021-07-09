@@ -5,6 +5,7 @@ use App\Models\Flat;
 use App\Models\Floor;
 use App\Models\Porche;
 use App\Models\House;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class FlatController extends Controller
@@ -82,11 +83,22 @@ class FlatController extends Controller
      * @param  \App\Models\Flat  $flat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Flat $flat)
+    public function edit($id)
     {
-        $flats = Flat::latest()->paginate(5);
         $floors=Floor::orderBy('created_at', 'Desc')->get();
-        return view('flats.edit',['floors'=>$floors], compact('flats'));
+        $flats=Flat::orderBy('created_at', 'Desc')->get();
+        $flat = Flat::find($id);
+        return view('flats.edit', compact('flat', 'floors', 'flats'));
+    }
+    
+    public function sell($id)
+    {
+        $floors=Floor::orderBy('created_at', 'Desc')->get();
+        $flats=Flat::orderBy('created_at', 'Desc')->get();
+        $clients = Client::orderBy('created_at', 'Desc')->get();
+        $flat = Flat::find($id);
+        return view('flats.sell', compact('flat', 'floors', 'flats', 'clients'));
+        
     }
     /**
      * Update the specified resource in storage.
@@ -97,13 +109,7 @@ class FlatController extends Controller
      */
     public function update(Request $request, Flat $flat)
     {
-        $request->validate([
-            'number' => 'required',
-            'name' => 'required',
-            'area' => 'required',
-            'price' => 'required',
-            'floor_id' => 'required'
-        ]);
+        
         $flat->update($request->all());
 
         return redirect()->route('flats.index')
