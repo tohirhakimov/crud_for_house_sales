@@ -11,7 +11,8 @@ class Sold_flat extends Model
 
     protected $fillable = [
         'flat_id',
-        'client_id'
+        'client_id',
+        'total_price'
     ];
 
     

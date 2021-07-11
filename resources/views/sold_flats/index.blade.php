@@ -29,7 +29,7 @@
             
             <td>{{ $sold_flat->name }}</td>
             <td>{{ $sold_flat->id }}</td>
-            <td>{{ $sold_flat->price * $sold_flat->area }}</td>
+            <td>{{ $sold_flat->total_amount}}</td>
             <td>
                  <a class="btn btn-info" href="{{ route('sold_flats.show',$sold_flat->id) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('sold_flats.edit',$sold_flat->id) }}">Edit</a>

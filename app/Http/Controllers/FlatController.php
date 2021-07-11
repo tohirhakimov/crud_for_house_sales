@@ -6,6 +6,7 @@ use App\Models\Floor;
 use App\Models\Porche;
 use App\Models\House;
 use App\Models\Client;
+use App\Models\Sold_flat;
 use Illuminate\Http\Request;
 
 class FlatController extends Controller
@@ -74,6 +75,9 @@ class FlatController extends Controller
         $porche = Porche::find($porche_id);
         $floor = Floor::find($floor_id);
         $flat = Flat::find($flat_id);
+
+        
+        
         return view('flats.show', compact('flat', 'floors', 'porches', 'houses'));
     }
 
@@ -93,11 +97,28 @@ class FlatController extends Controller
     
     public function sell($id)
     {
+        
         $floors=Floor::orderBy('created_at', 'Desc')->get();
         $flats=Flat::orderBy('created_at', 'Desc')->get();
         $clients = Client::orderBy('created_at', 'Desc')->get();
         $flat = Flat::find($id);
         return view('flats.sell', compact('flat', 'floors', 'flats', 'clients'));
+    
+        
+    }
+    public function readyToSell(Request $request)
+    {
+        
+        $flat=Flat::find($request->flat_id);
+        $client=Client::find($request->client_id);
+        $total_amount=$flat->price*$flat->area;
+        Sold_flat::create([
+            'flat_id'=>$flat->id,
+            'client'=>$client->id,
+            'total_amount'=>$total_amount
+        ]);
+        return redirect()->route('sold_flats');
+    
         
     }
     /**
@@ -111,7 +132,7 @@ class FlatController extends Controller
     {
         
         $flat->update($request->all());
-
+        
         return redirect()->route('flats.index')
             ->with('success', 'flat updated successfully');
     }

@@ -65,6 +65,7 @@ class SoldFlatController extends Controller
      */
     public function show($sold_flat)
     {
+        
         $clients=Client::orderBy('created_at', 'Desc')->get();
         $flats=Flat::orderBy('created_at', 'Desc')->get();
         $sold_flat = Flat::where('status', 'sold');
@@ -79,6 +80,7 @@ class SoldFlatController extends Controller
      */
     public function edit($id)
     {
+       
         $clients=Client::orderBy('created_at', 'DESC')->get();
         $flats=Flat::where('status', 'sold')->firstOrFail();
         $sold_flat = Flat::where('status', 'sold');
@@ -92,7 +94,7 @@ class SoldFlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Sold_flat $sold_flat)
-    {
+    { 
         
         $sold_flat->update($request->all());
 
