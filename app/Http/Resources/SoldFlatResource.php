@@ -16,7 +16,8 @@ class SoldFlatResource extends JsonResource
     {
         return [
             'client_id' => $this->client_id,
-            'flat_id' => $this->flat_id
+            'flat_id' => $this->flat_id,
+            'total_price' => $this->total_price
         ];
     }
 }

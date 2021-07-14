@@ -66,6 +66,7 @@ class FloorController extends Controller
     {
         $houses=House::orderBy('created_at', 'Desc')->get();
         $porches=Porche::orderBy('created_at', 'Desc')->get();
+        
         $porche = Porche::find($porche_id);
         $floor = Floor::find($floor_id);
         return view('floors.show', compact('floor', 'porches', 'houses'));

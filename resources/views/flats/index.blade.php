@@ -39,12 +39,11 @@
                  <a class="btn btn-info" href="{{ route('house.porche.floor.flat.show',[$flat->floor->porche->house->id, $flat->floor->porche_id, $flat->floor_id, $flat->id]) }}">Show</a>
                     <a class="btn btn-primary" href="{{ route('flats.edit',$flat->id) }}">Edit</a>
                 <form action="{{ route('flats.destroy',$flat->id) }}" method="POST">
-                    <a class="btn btn-primary" href="{{ route('flats.sell',$flat->id) }}">Sell</a>
+                    <a class="btn btn-danger" href="{{ route('flats.selling',$flat->id) }}">Sell</a>
                 
    
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+
                 </form>
             </td>
         </tr>

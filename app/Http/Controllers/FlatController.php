@@ -39,6 +39,32 @@ class FlatController extends Controller
         return view('flats.create',['floors'=>$floors], compact('flats'));
     }
 
+    public function sell($id)
+    {
+        
+        $floors=Floor::orderBy('created_at', 'Desc')->get();
+        $flats=Flat::orderBy('created_at', 'Desc')->get();
+        $clients = Client::orderBy('created_at', 'Desc')->get();
+        $flat = Flat::find($id);
+        return view('flats.sell', compact('flat', 'floors','flats', 'clients'));
+    
+        
+    }
+    public function readyToSell(Request $request)
+    {
+        $flat=Flat::find($request->flat_id);
+        $client=Client::find($request->client_id);
+        $total_price=$flat->price*$flat->area;
+        Sold_flat::create([
+            'flat_id'=>$flat->id,
+            'client_id'=>$client->id,
+            'total_price'=>$total_price
+        ]);
+        return redirect()->route('flats.selling');
+    
+        
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -47,13 +73,6 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'number' => 'required',
-            'area' => 'required',
-            'price' => 'required',
-            'floor_id' => 'required'
-        ]);
 
         Flat::create($request->all());
 
@@ -72,13 +91,12 @@ class FlatController extends Controller
         $houses=House::orderBy('created_at', 'Desc')->get();
         $porches=Porche::orderBy('created_at', 'Desc')->get();
         $floors=Floor::orderBy('created_at', 'Desc')->get();
-        $porche = Porche::find($porche_id);
         $floor = Floor::find($floor_id);
         $flat = Flat::find($flat_id);
-
+        $porche = Porche::find($porche_id);
         
         
-        return view('flats.show', compact('flat', 'floors', 'porches', 'houses'));
+        return view(' flats.show', compact('flat', 'floors', 'porches', 'houses'));
     }
 
     /**
@@ -95,32 +113,7 @@ class FlatController extends Controller
         return view('flats.edit', compact('flat', 'floors', 'flats'));
     }
     
-    public function sell($id)
-    {
-        
-        $floors=Floor::orderBy('created_at', 'Desc')->get();
-        $flats=Flat::orderBy('created_at', 'Desc')->get();
-        $clients = Client::orderBy('created_at', 'Desc')->get();
-        $flat = Flat::find($id);
-        return view('flats.sell', compact('flat', 'floors', 'flats', 'clients'));
-    
-        
-    }
-    public function readyToSell(Request $request)
-    {
-        
-        $flat=Flat::find($request->flat_id);
-        $client=Client::find($request->client_id);
-        $total_amount=$flat->price*$flat->area;
-        Sold_flat::create([
-            'flat_id'=>$flat->id,
-            'client'=>$client->id,
-            'total_amount'=>$total_amount
-        ]);
-        return redirect()->route('sold_flats');
-    
-        
-    }
+
     /**
      * Update the specified resource in storage.
      *

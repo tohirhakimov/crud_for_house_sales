@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Show Floors</h2>
+                <h2> Show Flats</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('floors.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('flats.index') }}"> Back</a>
             </div>
         </div>
     </div>

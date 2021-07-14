@@ -55,14 +55,14 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Area:</strong>
-                    <textarea class="form-control" style="height:150px" name="Are" placeholder="Area">{{ $flat->number }}</textarea>
+                    <textarea class="form-control" style="height:150px" name="Are" placeholder="Area">{{ $flat->area }}</textarea>
                 </div>
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Price:</strong>
-                    <textarea class="form-control" style="height:150px" name="Price" placeholder="Price">{{ $flat->number }}</textarea>
+                    <textarea class="form-control" style="height:150px" name="Price" placeholder="Price">{{ $flat->price }}</textarea>
                 </div>
             </div>
 

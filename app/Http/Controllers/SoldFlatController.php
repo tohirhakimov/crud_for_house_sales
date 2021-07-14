@@ -15,9 +15,11 @@ class SoldFlatController extends Controller
      */
     public function index()
     {
-        $sold_flats = Flat::where("status","sold")->paginate(5);
+        $flats = Flat::where("status","sold")->paginate(5);
+    
+
         $clients=Client::orderBy('created_at', 'DESC')->get();
-        return view('sold_flats.index', compact('sold_flats', 'clients'))
+        return view('sold_flats.index', compact('flats', 'clients'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -63,13 +65,14 @@ class SoldFlatController extends Controller
      * @param  \App\Models\Sold_flat  $sold_flat
      * @return \Illuminate\Http\Response
      */
-    public function show($sold_flat)
+    public function show($soldflat_id)
     {
         
         $clients=Client::orderBy('created_at', 'Desc')->get();
         $flats=Flat::orderBy('created_at', 'Desc')->get();
-        $sold_flat = Flat::where('status', 'sold');
-        return view('sold_flats.show', compact('sold_flat', 'clients', 'flats'));
+        $sold_flats = Flat::where('status', 'sold');
+        $soldflat = Sold_flat::find($soldflat_id);
+        return view('sold_flats.show', compact('clients', 'flats', 'sold_flats','sold_flat'));
     }
 
     /**

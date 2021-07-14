@@ -15,5 +15,12 @@ class Sold_flat extends Model
         'total_price'
     ];
 
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function flat() {
+        return $this->belongsTo(Flat::class);
+    }
     
 }
